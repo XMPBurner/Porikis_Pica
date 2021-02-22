@@ -133,6 +133,35 @@ class pica extends JFrame{
 		piedevas2_panel.add(piedevas_panel);
 		add(piedevas2_panel);
     }
+
+    public void Pica(){
+		
+		pica_Label = new JLabel("Picas: ");
+		pica2_Label = new JLabel("Pica: ");
+		pica_op = new JLabel();
+		pica_panel = new JPanel();
+		pica_panel.setLayout(new GridLayout(4, 5));
+		DefaultComboBoxModel Picas = new DefaultComboBoxModel(new String[] {"Kapri Pica", "Kalifornijas Pica", "Lauku pica", "Pepperoni Pica", "Vezuma pica", "Čempionu pica"});
+		JComboBox picas_box = new JComboBox(Picas);
+		picas_box.setSelectedIndex(-1);
+		pica_panel.add(pica_Label);
+		pica_panel.add(picas_box);	
+
+
+
+		picas_box.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				pica_op.setText((String)((JComboBox)e.getSource()).getSelectedItem());
+				b = (picas_box.getSelectedItem().toString());
+			}	
+		});
+
+		add(pica_panel);
+
+
+}
 }
 
 class Picas {
@@ -141,6 +170,7 @@ class Picas {
         pica gui_obj = new pica();
         gui_obj.Input();
         gui_obj.Piedevas();
+        gui_obj.Pica();
         
 
         gui_obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
