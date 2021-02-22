@@ -15,14 +15,14 @@ class pica extends JFrame{
     private JPanel input_panel, delivery_panel, piedevas_panel, piedevas2_panel, daudzums_panel, pica_panel, izmers_panel, initial_panel, buttons_panel;
     private JPanel pied1_panel, pied2_panel;
     private JCheckBox top_sipoli, top_senes, top_brokolis, top_kokuruza, top_salami, top_siers;
-    private JComboBox quantity_box, picas_box, lielums_Box;
+    private JComboBox daudzums_box, picas_box, izmers_Box;
     public Double a, sum = 0.0;
     public String b, c;
 
-    private JLabel quantity_op_label, quantity_op, pica_op, lielums_op;
+    private JLabel daudzums_op_label, daudzums_op, pica_op, izmers_op;
     private JButton print, clear, calculate;
     private ImageIcon print_icon, clear_icon;
-    private JLabel name_op, address_op, contact_op;
+    private JLabel vards_op, adrese_op, nummurs_op;
     String name_str, address_str, contact_str;
     private JLabel vards2, adrese2, nummurs2;
 
@@ -161,7 +161,79 @@ class pica extends JFrame{
 		add(pica_panel);
 
 
+    }
+
+    public void Izmers()
+	{
+		izmers_label = new JLabel("Izmērs: ");
+		izmers2_label = new JLabel("Izmērs: ");
+		izmers_op = new JLabel();
+		izmers_panel = new JPanel();
+		izmers_panel.setLayout(new GridLayout(3, 4));
+		
+		DefaultComboBoxModel izmers = new DefaultComboBoxModel(new String[] {"20", "30", "50"});
+		JComboBox<Object> izmers_box = new JComboBox<Object>(izmers);
+
+		izmers_box.setSelectedIndex(-1);
+		izmers_panel.add(izmers_label);
+		izmers_panel.add(izmers_box);
+		
+
+		
+		izmers_box.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				izmers_op.setText((String)((JComboBox)e.getSource()).getSelectedItem());
+				c = (izmers_box.getSelectedItem().toString());
+			}	
+		});
+
+		
+
+		add(izmers_panel);
+	
 }
+
+public void Daudzums() 
+{
+
+    daudzums_label = new JLabel("Daudzums: ");
+    daudzums_op_label = new JLabel("Daudzums: ");
+    daudzums_op = new JLabel();
+    daudzums_panel = new JPanel();
+    daudzums_panel.setLayout(new GridLayout(2, 2));
+    String[] daudzums = {"1", "2", "3", "4", "5"};
+
+
+    
+    JComboBox<String>daudzums_box = new JComboBox<String>();
+    for(int i = 0; i < daudzums.length; i++)		
+        daudzums_box.addItem(daudzums[i]);
+        daudzums_box.setSelectedIndex(-1);
+
+
+
+                    
+    daudzums_panel.add(daudzums_label);
+    daudzums_panel.add(daudzums_box);
+    
+    
+    daudzums_box.addActionListener(new ActionListener() 
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            daudzums_op.setText((String)((JComboBox)e.getSource()).getSelectedItem());
+            a = Double.parseDouble(daudzums_box.getSelectedItem().toString());
+        }	
+    });
+    
+
+    add(daudzums_panel);
+} 
+
+
+
 }
 
 class Picas {
@@ -171,6 +243,8 @@ class Picas {
         gui_obj.Input();
         gui_obj.Piedevas();
         gui_obj.Pica();
+        gui_obj.Izmers();
+        gui_obj.Daudzums();
         
 
         gui_obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
