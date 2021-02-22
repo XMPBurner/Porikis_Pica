@@ -12,8 +12,8 @@ class pica extends JFrame{
     private ButtonGroup group;
     private JLabel delivery_type, vards, adrese, pica_Label, pica2_Label, izmers_label, izmers2_label, nummurs, piedevas_label, daudzums_label;
     private JTextField vards_tf, adrese_tf, nummurs_tf;
-    private JPanel input_panel, delivery_panel, piedeval_panel, piedevas2_panel, daudzums_panel, pica_panel, izmers_panel, initial_panel, buttons_panel;
-    private JPanel peid1_panel, pied2_panel;
+    private JPanel input_panel, delivery_panel, piedevas_panel, piedevas2_panel, daudzums_panel, pica_panel, izmers_panel, initial_panel, buttons_panel;
+    private JPanel pied1_panel, pied2_panel;
     private JCheckBox top_sipoli, top_senes, top_brokolis, top_kokuruza, top_salami, top_siers;
     private JComboBox quantity_box, picas_box, lielums_Box;
     public Double a, sum = 0.0;
@@ -24,7 +24,7 @@ class pica extends JFrame{
     private ImageIcon print_icon, clear_icon;
     private JLabel name_op, address_op, contact_op;
     String name_str, address_str, contact_str;
-    private JLabel name2, address2, contact2;
+    private JLabel vards2, adrese2, nummurs2;
 
 
 	public pica() {
@@ -77,6 +77,62 @@ class pica extends JFrame{
     }
 
 
+    public void Piedevas(){
+        pied1_panel = new JPanel();
+        pied1_panel.setLayout(new GridLayout(1, 3));
+
+        pied2_panel = new JPanel();
+		pied2_panel.setLayout(new GridLayout(1, 3));
+		
+		piedevas_panel = new JPanel();
+		piedevas_panel.setLayout(new GridLayout(2, 1));
+		
+		piedevas2_panel = new JPanel();
+	    piedevas2_panel.setLayout(new GridLayout(2, 1));
+		
+		piedevas_label = new JLabel("Piedevas:");	
+		
+		top_sipoli = new JCheckBox("Sīpoļi +0,20", false);
+		top_senes = new JCheckBox("Sēnes +0,20", false);
+		top_brokolis = new JCheckBox("Brokoļi +0.20", false);
+		top_kokuruza = new JCheckBox("kokurūza +0.20", false);
+		top_salami = new JCheckBox("Salamī +0,20", false);
+		top_siers = new JCheckBox("Siers +0.20", false);
+
+		ItemListener itemListener = new ItemListener()
+		{
+			public void itemStateChanged(ItemEvent itemEvent)
+			{
+				AbstractButton abstractButton = (AbstractButton) itemEvent.getSource();
+				int state = itemEvent.getStateChange();
+				if(state == ItemEvent.SELECTED)
+				{
+					sum = sum + 0.20;
+				}
+			}
+		};
+			
+		top_sipoli.addItemListener(itemListener);
+		top_senes.addItemListener(itemListener);
+		top_brokolis.addItemListener(itemListener);
+		top_kokuruza.addItemListener(itemListener);
+		top_salami.addItemListener(itemListener);
+		top_siers.addItemListener(itemListener);
+		
+		pied1_panel.add(top_sipoli);
+		pied1_panel.add(top_senes);
+	    pied1_panel.add(top_brokolis);	
+		pied2_panel.add(top_kokuruza);
+		pied2_panel.add(top_salami);	
+		pied2_panel.add(top_siers);					
+	
+		piedevas_panel.add(pied1_panel);
+		piedevas_panel.add(pied2_panel);
+					
+		piedevas2_panel.add(piedevas_label);
+		piedevas2_panel.add(piedevas_panel);
+		add(piedevas2_panel);
+    }
 }
 
 class Picas {
@@ -84,6 +140,7 @@ class Picas {
 
         pica gui_obj = new pica();
         gui_obj.Input();
+        gui_obj.Piedevas();
         
 
         gui_obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,6 +148,6 @@ class Picas {
 		gui_obj.setSize(575,500);
 		gui_obj.setVisible(true);
 
-        
+
     }
 }
