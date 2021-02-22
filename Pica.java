@@ -23,7 +23,7 @@ class pica extends JFrame{
     private JButton print, clear, calculate;
     private ImageIcon print_icon, clear_icon;
     private JLabel vards_op, adrese_op, nummurs_op;
-    String name_str, address_str, contact_str;
+    String vards_str, adrese_str, nummurs_str;
     private JLabel vards2, adrese2, nummurs2;
 
 
@@ -232,6 +232,136 @@ public void Daudzums()
     add(daudzums_panel);
 } 
 
+public void Output()
+{	
+    print_icon = new ImageIcon("print.png");
+    clear_icon = new ImageIcon("clear.png");
+    
+    buttons_panel = new JPanel();
+    buttons_panel.setLayout(new GridLayout(1, 2, 10, 0));
+                
+    Picas = new JLabel("Pica: ");
+    vards2 = new JLabel("Name: ");
+    adrese2 = new JLabel("Address: ");
+    nummurs2= new JLabel("Contact Number: ");
+
+    String sum_str;
+    sum_str = Double.toString(sum);
+    JLabel sum_label = new JLabel("Sum: ");
+    JLabel sum_op_label = new JLabel(sum_str);
+    
+    print = new JButton("Print");
+    print.setRolloverIcon(print_icon);
+    print.setRolloverEnabled(true);
+    clear = new JButton("Clear");
+
+    
+    buttons_panel.add(print);
+    buttons_panel.add(clear);		
+        
+    add(buttons_panel);
+                    
+            
+    clear.addActionListener(new ActionListener()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            vards_tf.setText("");
+            adrese_tf.setText("");
+            nummurs_tf.setText("");
+            group.clearSelection();
+            vards.setEnabled(true);
+            adrese.setEnabled(true);
+            nummurs.setEnabled(true); 
+                
+            vards_tf.setEditable(true);
+            adrese_tf.setEditable(true);
+            nummurs_tf.setEditable(true);	
+            vards_tf.setEnabled(true);
+            adrese_tf.setEnabled(true);
+            nummurs_tf.setEnabled(true);
+            
+            top_brokolis.setSelected(false);
+            top_salami.setSelected(false);
+            top_siers.setSelected(false);
+            top_kokuruza.setSelected(false);
+            top_senes.setSelected(false);
+            top_sipoli.setSelected(false);
+            
+                
+        }
+    });
+    
+    print.addActionListener(new ActionListener()
+    {
+
+
+        public void actionPerformed(ActionEvent e)
+        {	
+            if(b == "Studentu Pica"){
+                sum = sum + 3.25;
+            }else if(b  == "Vistas Kariju pica"){
+                sum = sum + 2.34;
+            }else if(b  == "Zemnieku Pica"){
+                sum = sum + 3.23;
+            }else if(b  == "Havaju pica"){
+                sum = sum + 5.75;
+            }else if(b  == "Kalifornijas Pica"){
+                sum = sum + 8.42;
+            }else if(b  == "amerikāņu pica"){
+                sum = sum + 9.22;
+            }
+
+            if(c == "20"){
+                sum = sum + 2.50;
+            }else if(c  == "30"){
+                sum = sum + 4.50;
+            }else if(c  == "50"){
+                sum = sum + 7.0;
+            }
+
+            sum = sum * a;
+
+            String sum_str;
+            sum_str = Double.toString(sum);
+            JLabel sum_label = new JLabel("Sum: ");
+            JLabel sum_op_label = new JLabel(sum_str);
+            
+            JFrame output = new JFrame();
+            output.setLayout(new GridLayout(10, 5));									
+            
+            vards_str = vards_tf.getText();
+            adrese_str = adrese_tf.getText();
+            nummurs_str = nummurs_tf.getText();
+            
+            vards_op = new JLabel(vards_str);
+            adrese_op = new JLabel(adrese_str);
+            nummurs_op = new JLabel(nummurs_str);
+            
+            output.add(vards2);
+            output.add(vards_op);
+            output.add(adrese2);
+            output.add(adrese_op);
+            output.add(nummurs2);
+            output.add(nummurs_op);	
+
+            output.add(pica2_Label);
+            output.add(pica_op);
+            output.add(izmers2_label);
+            output.add(izmers_op);
+            output.add(sum_label);
+            output.add(sum_op_label);
+            output.add(daudzums_op_label);				
+            output.add(daudzums_op);
+            output.pack();
+            output.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            output.setLocationRelativeTo(null);
+            output.setSize(450, 250);
+            output.setVisible(true);
+        }
+    });
+    
+}
 
 
 }
@@ -245,6 +375,7 @@ class Picas {
         gui_obj.Pica();
         gui_obj.Izmers();
         gui_obj.Daudzums();
+        gui_obj.Output();
         
 
         gui_obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
